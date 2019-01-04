@@ -83,13 +83,11 @@
 
     LazyLoad.prototype = {
         init: function() {
-
             /* Without observers load everything and bail out early. */
             if (!root.IntersectionObserver) {
                 this.loadImages();
                 return;
             }
-
             let self = this;
             let observerConfig = {
                 root: null,
@@ -111,7 +109,10 @@
                                 entry.target.srcset = srcset;
                             }
                         } else {
-                            entry.target.style.backgroundImage = "url(" + src + ")";
+                            entry.target.style.backgroundImage = "url('" + src + "')";
+                        }
+                        if(self.settings.afterLoad && typeof self.settings.afterLoad === 'function'){
+                            self.settings.afterLoad(entry.target);
                         }
                     }
                 });
@@ -130,7 +131,6 @@
 
         loadImages: function () {
             if (!this.settings) { return; }
-
             let self = this;
             this.images.forEach(function (image) {
                 let src = image.getAttribute(self.settings.src);
