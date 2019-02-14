@@ -127,6 +127,16 @@ To reduce the amount of request you can use data uri images as the placeholder.
      width="1024" height="768" />
 ```
 
+
+### Event
+- After load
+```
+$("...").lazyload({afterLoad : function(elm){/* do something */}});
+
+```
+
+
+
 ## Install
 
 This is still work in progress. You can install beta version with yarn or npm.
