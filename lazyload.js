@@ -111,8 +111,11 @@
                         } else {
                             entry.target.style.backgroundImage = "url('" + src + "')";
                         }
+                        
                         if(self.settings.afterLoad && typeof self.settings.afterLoad === 'function'){
-                            self.settings.afterLoad(entry.target);
+                            entry.target.onload = function(event){
+                                self.settings.afterLoad(entry.target, event);
+                            }
                         }
                     }
                 });
