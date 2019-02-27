@@ -111,7 +111,6 @@
                         } else {
                             entry.target.style.backgroundImage = "url('" + src + "')";
                         }
-                        
                         if(self.settings.afterLoad && typeof self.settings.afterLoad === 'function'){
                             entry.target.onload = function(event){
                                 self.settings.afterLoad(entry.target, event);
@@ -138,6 +137,7 @@
             this.images.forEach(function (image) {
                 let src = image.getAttribute(self.settings.src);
                 let srcset = image.getAttribute(self.settings.srcset);
+
                 if ("img" === image.tagName.toLowerCase()) {
                     if (src) {
                         image.src = src;
@@ -147,6 +147,12 @@
                     }
                 } else {
                     image.style.backgroundImage = "url('" + src + "')";
+                }
+
+                if(self.settings.afterLoad && typeof self.settings.afterLoad === 'function'){
+                    image.onload = function(event){
+                        self.settings.afterLoad(image, event);
+                    }
                 }
             });
         },
